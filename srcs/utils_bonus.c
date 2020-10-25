@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 09:10:08 by ztawanna          #+#    #+#             */
-/*   Updated: 2020/10/24 20:21:14 by ztawanna         ###   ########.fr       */
+/*   Updated: 2020/10/25 18:44:06 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void		init_player(t_prm *prm)
 		prm->player.dir_x = -1;
 		prm->cam->plane_y = -0.66;
 	}
-	prm->player.mv_spd = 0.25;
+	prm->player.mv_spd = 0.35;
 	prm->player.rot_spd = prm->player.mv_spd / 3;
 	sprites_init(prm);
 }

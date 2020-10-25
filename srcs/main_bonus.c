@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 00:18:55 by ztawanna          #+#    #+#             */
-/*   Updated: 2020/10/24 19:42:45 by ztawanna         ###   ########.fr       */
+/*   Updated: 2020/10/25 18:39:44 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int			check_args(char *name, char *save)
 	int		i;
 
 	i = ft_strlen(name);
-	if (ft_memcmp(&name[i - 4], ".cub", 4) != 0 ||
-		ft_memcmp(save, "--save", 6) != 0 || ft_memcmp(save, "none", 4) != 0)
+	if (ft_memcmp(&name[i - 4], ".cub", 4) == 0 &&
+		(ft_memcmp(save, "--save", 6) == 0 || ft_memcmp(save, "none", 4) == 0))
 		return (1);
 	return (0);
 }

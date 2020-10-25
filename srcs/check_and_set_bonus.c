@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 17:54:16 by ztawanna          #+#    #+#             */
-/*   Updated: 2020/10/24 19:27:27 by ztawanna         ###   ########.fr       */
+/*   Updated: 2020/10/25 18:42:48 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ void		check_map(t_prm *prm)
 				prm->world_map[i][j - 1] == '2')))
 				error_handler(BAD_MAP_ERR);
 			if ((prm->world_map[i][j] == '0' || prm->world_map[i][j] == '2') &&
-				(i == 0 || j == 0 || i == prm->map_width || j == prm->map_height
-		|| prm->world_map[i - 1][j] == ' ' || prm->world_map[i][j - 1] == ' '))
+				(i == 0 || j == 0 || i == prm->map_width - 1 ||
+				j == prm->map_height - 1 || prm->world_map[i - 1][j] == ' ' ||
+				prm->world_map[i][j - 1] == ' '))
 				error_handler(BAD_MAP_ERR);
 			j++;
 		}

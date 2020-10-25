@@ -6,13 +6,13 @@
 #    By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/08 00:19:12 by ztawanna          #+#    #+#              #
-#    Updated: 2020/10/23 20:22:09 by ztawanna         ###   ########.fr        #
+#    Updated: 2020/10/25 18:37:11 by ztawanna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Cub3D
+NAME = cub3D
 
-NAME_BONUS = Cub3D_bonus
+NAME_BONUS = cub3D_bonus
 
 CC = clang
 

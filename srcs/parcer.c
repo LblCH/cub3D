@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 03:51:38 by ztawanna          #+#    #+#             */
-/*   Updated: 2020/10/22 23:10:21 by ztawanna         ###   ########.fr       */
+/*   Updated: 2020/10/25 19:13:47 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,8 @@ void		init_floor_n_ceiling(char *line, t_prm *prm)
 		i++;
 	while (line[i])
 	{
-		color = ft_atoi(&line[i]);
-		if (color < 0 || color > 255)
-			error_handler(COLOR_ERR);
+		(ft_isdigit(line[i])) ? color = ft_atoi(&line[i]) : error_handler(COLOR_ERR);
+		(color < 0 || color > 255) ? error_handler(COLOR_ERR) : (0);
 		rgb = (rgb | (color << (8 * (x--))));
 		while (ft_isdigit(line[i]))
 			i++;
