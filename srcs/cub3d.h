@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 01:14:28 by ztawanna          #+#    #+#             */
-/*   Updated: 2020/10/22 21:44:54 by ztawanna         ###   ########.fr       */
+/*   Updated: 2020/10/28 04:41:30 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ void			load_game(char *name, int save);
 ** parcer.c
 */
 void			parcing(int fd, t_prm *prm);
-void			init_floor_n_ceiling(char *line, t_prm *prm);
+void			init_floor_n_ceiling(char *line, t_prm *prm, int i);
 void			init_floor_n_ceiling2(char c, t_prm *prm, int x, int rgb);
 void			init_resolution(char *line, t_prm *prm);
 void			init_map(char *line, t_prm *prm);

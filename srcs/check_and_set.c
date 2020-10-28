@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 17:54:16 by ztawanna          #+#    #+#             */
-/*   Updated: 2020/10/25 18:35:26 by ztawanna         ###   ########.fr       */
+/*   Updated: 2020/10/28 04:49:02 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ void		check_map(t_prm *prm)
 		}
 		i++;
 	}
-	if (prm->player.dir == '0')
-		error_handler(BAD_MAP_ERR);
+	(prm->player.dir == '0') ? error_handler(BAD_MAP_ERR) : (0);
 }
 
 void		check_and_set_pos(t_prm *prm, int i, int j, int z)

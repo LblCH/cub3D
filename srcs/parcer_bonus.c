@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 03:51:38 by ztawanna          #+#    #+#             */
-/*   Updated: 2020/10/23 21:17:24 by ztawanna         ###   ########.fr       */
+/*   Updated: 2020/10/28 04:40:57 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		init_map(char *line, t_prm *prm)
 
 	len = ft_strlen(line);
 	prm->map_width = ((int)len > prm->map_width) ? len : prm->map_width;
-	if (len < 2)
+	if (len < 1)
 		error_handler(BAD_MAP_ERR);
 	temp = ft_strjoin(prm->map_str, line);
 	temp2 = ft_strjoin(temp, "\n");
@@ -52,20 +52,19 @@ void		init_resolution(char *line, t_prm *prm)
 		error_handler(RESOL_ERR);
 }
 
-void		init_floor_n_ceiling(char *line, t_prm *prm)
+void		init_floor_n_ceiling(char *line, t_prm *prm, int i)
 {
-	int		i;
 	int		x;
 	int		color;
 	int		rgb;
 
-	i = 1;
 	x = 2;
 	while (ft_isspace(line[i]))
 		i++;
 	while (line[i])
 	{
-		color = ft_atoi(&line[i]);
+		(ft_isdigit(line[i]) && x != -1) ? color = ft_atoi(&line[i]) :
+													error_handler(COLOR_ERR);
 		if (color < 0 || color > 255)
 			error_handler(COLOR_ERR);
 		rgb = (rgb | (color << (8 * (x--))));
@@ -74,7 +73,8 @@ void		init_floor_n_ceiling(char *line, t_prm *prm)
 		while (ft_isspace(line[i]))
 			i++;
 		if (line[i])
-			(line[i] == ',' || x == -1) ? i++ : error_handler(COLOR_ERR);
+			((line[i] == ',' || x == -1) && !ft_isdigit(line[i])) ? i++ :
+													error_handler(COLOR_ERR);
 		while (ft_isspace(line[i]))
 			i++;
 	}
@@ -107,7 +107,7 @@ void		parcing(int fd, t_prm *prm)
 		else if (line[i] && ft_strchr("NSWE", line[i]))
 			set_texture(line, prm);
 		else if (line[i] && ft_strchr("FC", line[i]) && line[i + 1] == ' ')
-			init_floor_n_ceiling(line, prm);
+			init_floor_n_ceiling(line, prm, 1);
 		else if (line[i] && line[i] == 'F' && line[i + 1] == 'L')
 			set_texture(line, prm);
 		else if (line[i] == '1' || line[i] == ' ')

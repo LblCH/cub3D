@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 02:24:42 by ztawanna          #+#    #+#             */
-/*   Updated: 2020/10/23 15:48:22 by ztawanna         ###   ########.fr       */
+/*   Updated: 2020/10/28 04:17:00 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 void		set_texture(char *file, t_prm *prm)
 {
 	int		i;
+	int		j;
 
 	i = 2;
 	while (ft_isspace(file[i]))
 		i++;
+	j = ft_strlen(file) - 1;
+	while (ft_isspace(file[j]))
+		file[j--] = '\0';
 	if (open(&file[i], O_RDONLY) < 0)
 		error_handler(TEXTURE_ERR);
 	if (*file == 'N' && *(file + 1) == 'O' && *prm->txtr_n->data == 0)
