@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 23:12:56 by ztawanna          #+#    #+#             */
-/*   Updated: 2020/10/21 00:23:11 by ztawanna         ###   ########.fr       */
+/*   Updated: 2020/10/28 21:14:37 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int			ft_atoi(const char *str)
 		if (res > (res * 10 + (str[i + 1] - 48)) && sign == 1)
 			return (-1);
 		else if (res > (res * 10 + (str[i + 1] - 48)) && sign == -1)
-			return (0);
+			return (-1);
 		i++;
 	}
 	return (res * sign);

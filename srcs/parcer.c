@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 03:51:38 by ztawanna          #+#    #+#             */
-/*   Updated: 2020/10/28 04:40:05 by ztawanna         ###   ########.fr       */
+/*   Updated: 2020/10/28 21:18:57 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ void		init_resolution(char *line, t_prm *prm)
 	mlx_get_screen_size(prm->mlx_ptr, &screen_width, &screen_height);
 	while (ft_isspace(line[i]))
 		i++;
-	if ((prm->width = ft_atoi(&line[i])) > screen_width)
+	if ((prm->width = ft_atoi(&line[i])) > screen_width || prm->width == -1)
 		prm->width = screen_width;
 	while (ft_isdigit(line[i]))
 		i++;
 	while (ft_isspace(line[i]))
 		i++;
-	if ((prm->height = ft_atoi(&line[i])) > screen_height)
+	if ((prm->height = ft_atoi(&line[i])) > screen_height || prm->height == -1)
 		prm->height = screen_height;
 	while (ft_isdigit(line[i]))
 		i++;
