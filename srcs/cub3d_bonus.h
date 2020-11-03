@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 01:14:28 by ztawanna          #+#    #+#             */
-/*   Updated: 2020/10/28 04:41:46 by ztawanna         ###   ########.fr       */
+/*   Updated: 2020/10/29 02:41:19 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,13 @@ typedef	struct	s_texture
 	int			endian2;
 	int			w2;
 	int			h2;
+	void		*imgt;
+	int			*datat;
+	int			bppt;
+	int			size_lt;
+	int			endiant;
+	int			wt;
+	int			ht;
 }				t_texture;
 
 typedef	struct	s_screen
@@ -238,7 +245,7 @@ void			draw_wall(t_prm *prm, int x);
 **sprites.c
 */
 void			sprites_casting(t_prm *prm);
-void			get_sprites_coord(t_prm *prm);
+void			get_sprites_coord(t_prm *prm, int i);
 int				get_active_spr_index(t_prm *prm);
 void			get_sprite_height_draw(t_prm *prm, int i);
 void			draw_sprite(t_prm *prm, int stripe, int i);
@@ -256,16 +263,19 @@ void			init_player(t_prm *prm);
 **keys.c
 */
 int				keys_hook(int key, t_prm *prm);
-void			move_up_down(t_prm *prm, int key);
 void			rotate_left_right(t_prm *prm, int key, double old_dir_x,
 									double old_plane_x);
-void			move_left_right(t_prm *prm, int key);
 int				ft_exit(t_prm *prm);
+void			load_level(t_prm *prm, char *name);
 
 /*
 **keys2.c
 */
 void			look_up_down_jump_crouch(t_prm *prm, int key);
+void			move_up(t_prm *prm, int key);
+void			move_down(t_prm *prm);
+void			move_left(t_prm *prm);
+void			move_right(t_prm *prm, int key);
 
 /*
 **save_bmp.c
@@ -279,4 +289,5 @@ static void		bmp_header(t_prm *prm, int fd);
 void			floor_raycasting(t_prm *prm);
 void			draw_floor(t_prm *prm, int y, int x);
 int				get_sprite_pixel(t_prm *prm, int i, int d, int stripe);
+int				draw_teleport(t_prm *prm, int i, int d, int stripe);
 #endif

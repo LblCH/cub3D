@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 02:24:42 by ztawanna          #+#    #+#             */
-/*   Updated: 2020/10/23 21:10:46 by ztawanna         ###   ########.fr       */
+/*   Updated: 2020/10/29 02:11:15 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void		set_texture(char *file, t_prm *prm)
 		memorize_texture(prm->txtr_spr, prm, &file[i]);
 	else if (*file == 'S' && *(file + 1) == 'B' && *prm->txtr_sky->data == 0)
 		memorize_texture(prm->txtr_sky, prm, &file[i]);
-	else if (*file == 'F' && *(file + 1) == 'L' && *prm->txtr_fl->data == 0)
+	else if (*file == 'F' && *(file + 1) == 'L')
 		memorize_texture(prm->txtr_fl, prm, &file[i]);
 	else
 		error_handler(TEXTURE_ERR);

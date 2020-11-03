@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 09:10:08 by ztawanna          #+#    #+#             */
-/*   Updated: 2020/10/28 01:57:22 by ztawanna         ###   ########.fr       */
+/*   Updated: 2020/10/29 02:41:06 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,12 @@ void		sprites_init(t_prm *prm)
 	prm->txtr_spr->data2 = (int*)mlx_get_data_addr(prm->txtr_spr->img2,
 		&prm->txtr_spr->bpp2, &prm->txtr_spr->size_l2,
 		&prm->txtr_spr->endian2);
-	prm->l_img = mlx_xpm_file_to_image(prm->mlx_ptr, "./textures/life.xpm",
-						&prm->a[1], &prm->a[2]);
-	prm->l_data = (int*)mlx_get_data_addr(prm->l_img, &prm->a[3],
-						&prm->a[4], &prm->a[5]);
-	get_sprites_coord(prm);
+	prm->txtr_spr->imgt = mlx_xpm_file_to_image(prm->mlx_ptr,
+		"./textures/teleport.xpm", &prm->txtr_spr->wt, &prm->txtr_spr->ht);
+	prm->txtr_spr->datat = (int*)mlx_get_data_addr(prm->txtr_spr->imgt,
+		&prm->txtr_spr->bppt, &prm->txtr_spr->size_lt,
+		&prm->txtr_spr->endiant);
+	get_sprites_coord(prm, 0);
 }
 
 void		calloc_structures(t_prm *prm)

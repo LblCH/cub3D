@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 00:18:55 by ztawanna          #+#    #+#             */
-/*   Updated: 2020/10/28 04:17:20 by ztawanna         ###   ########.fr       */
+/*   Updated: 2020/10/29 01:19:04 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ void		load_game(char *name, int save)
 	close(fd);
 	check_and_set_map(&prm);
 	init_player(&prm);
+	prm.mlx_ptr = mlx_init();
 	prm.win_ptr = mlx_new_window(prm.mlx_ptr, prm.width, prm.height, "Cub3D");
 	prm.screen->img = mlx_new_image(prm.mlx_ptr, prm.width, prm.height);
 	prm.screen->data = (int*)mlx_get_data_addr(prm.screen->img,
-		&prm.screen->bpp, &prm.screen->size_l, &prm.screen->endian);
+				&prm.screen->bpp, &prm.screen->size_l, &prm.screen->endian);
 	prm.save = (save == 1) ? 1 : 0;
 	prm.tick = 0;
 	start_render(&prm);

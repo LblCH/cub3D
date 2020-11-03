@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 15:15:15 by ztawanna          #+#    #+#             */
-/*   Updated: 2020/10/24 20:40:58 by ztawanna         ###   ########.fr       */
+/*   Updated: 2020/10/29 02:41:00 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		draw_sprite(t_prm *prm, int stripe, int i)
 													prm->sprite->height) / 256;
 			color = get_sprite_pixel(prm, i, d, stripe);
 			if (color != prm->txtr_spr->data[0] && color !=
-													prm->txtr_spr->data2[0])
+				prm->txtr_spr->data2[0] && color != prm->txtr_spr->datat[0])
 				*(prm->screen->data + (y * prm->width) + stripe) =
 				get_shadow(prm, color, prm->sprite->x[i], prm->sprite->y[i]);
 			y++;
@@ -91,20 +91,23 @@ int			get_active_spr_index(t_prm *prm)
 	return (act_i);
 }
 
-void		get_sprites_coord(t_prm *prm)
+void		get_sprites_coord(t_prm *prm, int i)
 {
-	int i;
 	int x;
 	int y;
 
+	prm->l_img = mlx_xpm_file_to_image(prm->mlx_ptr, "./textures/life.xpm",
+						&prm->a[1], &prm->a[2]);
+	prm->l_data = (int*)mlx_get_data_addr(prm->l_img, &prm->a[3],
+						&prm->a[4], &prm->a[5]);
 	x = 0;
-	i = 0;
 	while (x < prm->map_width)
 	{
 		y = 0;
 		while (y < prm->map_height)
 		{
-			if (prm->world_map[x][y] == '2' || prm->world_map[x][y] == '3')
+			if (prm->world_map[x][y] == '2' || prm->world_map[x][y] == '3' ||
+				prm->world_map[x][y] == 'T')
 			{
 				prm->sprite->x[i] = x + 0.6;
 				prm->sprite->y[i] = y + 0.6;

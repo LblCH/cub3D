@@ -6,11 +6,28 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 01:11:26 by ztawanna          #+#    #+#             */
-/*   Updated: 2020/10/24 20:37:06 by ztawanna         ###   ########.fr       */
+/*   Updated: 2020/10/29 02:47:01 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
+void		load_level(t_prm *prm, char *name)
+{
+	int		fd;
+
+	if ((fd = open(name, O_RDONLY)) < 0)
+		error_handler(MAP_OPENING_ERR);
+	prm->map_str = ft_strdup("");
+	prm->map_height = 0;
+	prm->map_width = 0;
+	parcing(fd, prm);
+	close(fd);
+	prm->player.dir = '0';
+	check_and_set_map(prm);
+	init_player(prm);
+	prm->tick = 0;
+}
 
 int			ft_exit(t_prm *prm)
 {
@@ -37,28 +54,6 @@ int			ft_exit(t_prm *prm)
 	free(prm->world_map);
 	mlx_destroy_window(prm->mlx_ptr, prm->win_ptr);
 	exit(0);
-}
-
-void		move_left_right(t_prm *prm, int key)
-{
-	if (key == KEY_D)
-	{
-		if (prm->world_map[(int)(prm->player.pos_x + prm->cam->plane_x *
-			prm->player.mv_spd)][(int)(prm->player.pos_y)] == '0')
-			prm->player.pos_x += prm->cam->plane_x * prm->player.mv_spd;
-		if (prm->world_map[(int)(prm->player.pos_x)][(int)(prm->player.pos_y +
-			prm->cam->plane_y * prm->player.mv_spd)] == '0')
-			prm->player.pos_y += prm->cam->plane_y * prm->player.mv_spd;
-	}
-	if (key == KEY_A)
-	{
-		if (prm->world_map[(int)(prm->player.pos_x - prm->cam->plane_x *
-			prm->player.mv_spd)][(int)(prm->player.pos_y)] == '0')
-			prm->player.pos_x -= prm->cam->plane_x * prm->player.mv_spd;
-		if (prm->world_map[(int)(prm->player.pos_x)][(int)(prm->player.pos_y -
-			prm->cam->plane_y * prm->player.mv_spd)] == '0')
-			prm->player.pos_y -= prm->cam->plane_y * prm->player.mv_spd;
-	}
 }
 
 void		rotate_left_right(t_prm *prm, int key, double old_dir_x,
@@ -88,28 +83,6 @@ void		rotate_left_right(t_prm *prm, int key, double old_dir_x,
 	}
 }
 
-void		move_up_down(t_prm *prm, int key)
-{
-	if (key == KEY_W)
-	{
-		if (prm->world_map[(int)(prm->player.pos_x + prm->player.dir_x *
-			prm->player.mv_spd)][(int)(prm->player.pos_y)] == '0')
-			prm->player.pos_x += prm->player.dir_x * prm->player.mv_spd;
-		if (prm->world_map[(int)(prm->player.pos_x)][(int)(prm->player.pos_y +
-			prm->player.dir_y * prm->player.mv_spd)] == '0')
-			prm->player.pos_y += prm->player.dir_y * prm->player.mv_spd;
-	}
-	if (key == KEY_S)
-	{
-		if (prm->world_map[(int)(prm->player.pos_x - prm->player.dir_x *
-			prm->player.mv_spd)][(int)(prm->player.pos_y)] == '0')
-			prm->player.pos_x -= prm->player.dir_x * prm->player.mv_spd;
-		if (prm->world_map[(int)(prm->player.pos_x)][(int)(prm->player.pos_y -
-			prm->player.dir_y * prm->player.mv_spd)] == '0')
-			prm->player.pos_y -= prm->player.dir_y * prm->player.mv_spd;
-	}
-}
-
 int			keys_hook(int key, t_prm *prm)
 {
 	double	old_dir_x;
@@ -118,14 +91,16 @@ int			keys_hook(int key, t_prm *prm)
 	old_dir_x = prm->player.dir_x;
 	old_plane_x = prm->cam->plane_x;
 	if (key == KEY_W || key == KEY_S)
-		move_up_down(prm, key);
+		move_up(prm, key);
 	if (key == KEY_Q || key == KEY_E)
 		rotate_left_right(prm, key, old_dir_x, old_plane_x);
 	if (key == KEY_A || key == KEY_D)
-		move_left_right(prm, key);
+		move_right(prm, key);
 	if (key == KEY_UP || key == KEY_DOWN || key == KEY_C || key == KEY_SPACE)
 		look_up_down_jump_crouch(prm, key);
 	if (key == KEY_ESC)
 		ft_exit(prm);
+	if (prm->world_map[(int)prm->player.pos_x][(int)prm->player.pos_y] == 'T')
+		load_level(prm, "./maps/map1_bonus.cub");
 	return (0);
 }

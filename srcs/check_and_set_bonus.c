@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 17:54:16 by ztawanna          #+#    #+#             */
-/*   Updated: 2020/10/28 04:49:18 by ztawanna         ###   ########.fr       */
+/*   Updated: 2020/10/29 01:53:57 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void		check_and_set_pos(t_prm *prm, int i, int j, int z)
 	if (prm->map_str[z] == '0' || prm->map_str[z] == '1' ||
 														prm->map_str[z] == ' ')
 		prm->world_map[i][j] = prm->map_str[z];
-	else if (prm->map_str[z] == '2' || prm->map_str[z] == '3')
+	else if (prm->map_str[z] == '2' || prm->map_str[z] == '3' ||
+														prm->map_str[z] == 'T')
 	{
 		prm->sprite->num++;
 		prm->world_map[i][j] = prm->map_str[z];
@@ -61,7 +62,10 @@ void		check_and_set_pos(t_prm *prm, int i, int j, int z)
 		prm->world_map[i][j] = '0';
 	}
 	else
+	{
+		printf("!!!%d!!!\n", prm->map_str[z]);
 		error_handler(BAD_MAP_ERR);
+	}
 }
 
 void		check_params(t_prm *prm)

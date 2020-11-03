@@ -6,11 +6,22 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 20:21:42 by ztawanna          #+#    #+#             */
-/*   Updated: 2020/10/24 20:30:30 by ztawanna         ###   ########.fr       */
+/*   Updated: 2020/10/29 00:32:57 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
+int			draw_teleport(t_prm *prm, int i, int d, int stripe)
+{
+	prm->sprite->txtr_x = (int)(256 * (stripe - (-prm->sprite->width / 2 +
+		prm->sprite->screen_x)) * prm->txtr_spr->wt / prm->sprite->width)
+		/ 256;
+	prm->sprite->txtr_y = ((d * prm->txtr_spr->ht) /
+												prm->sprite->height) / 256;
+	return (prm->txtr_spr->datat[(prm->txtr_spr->wt) * prm->sprite->txtr_y +
+		prm->sprite->txtr_x]);
+}
 
 int			get_sprite_pixel(t_prm *prm, int i, int d, int stripe)
 {
@@ -30,6 +41,11 @@ int			get_sprite_pixel(t_prm *prm, int i, int d, int stripe)
 													prm->sprite->height) / 256;
 		return (prm->txtr_spr->data2[(prm->txtr_spr->w2) * prm->sprite->txtr_y +
 			prm->sprite->txtr_x / 4 + prm->tick * (prm->txtr_spr->w2 / 4)]);
+	}
+	if (prm->world_map[(int)(prm->sprite->x[i] - 0.6)][(int)(prm->sprite->y[i]
+		- 0.6)] == 'T')
+	{
+		return (draw_teleport(prm, i, d, stripe));
 	}
 	return (0);
 }
